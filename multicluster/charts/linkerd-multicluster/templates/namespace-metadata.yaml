@@ -44,3 +44,6 @@ spec:
           curl -kfv -XPATCH -H "Content-Type: application/json-patch+json" -H "Authorization: Bearer $token" \
             -d "[$ops]" \
             "https://kubernetes.default.svc/api/v1/namespaces/{{.Release.Namespace}}?fieldManager=kubectl-label"
+
+          # Shutdown the sidecar proxy so the job can complete
+          curl -X POST http://localhost:4191/shutdown
